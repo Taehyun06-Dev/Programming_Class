@@ -37,8 +37,7 @@ void func_ChangeStrIntProblem(){ //메인 함수.
         sum = 0;
         scanf_s("%s", cData, sizeof(cData));
         for (int i = 0; cData[i] != '\0'; i++) {
-            char c = cData[i];
-            int x = c - '0';
+            int x = cData[i] - '0';
             if (x >= 49) { //문자(char)을 제시된 방법으로 바꾸니 49 이상의 값이 나와 해당 값을 continue로 거름. 즉, 문자를 거름.
                 continue;
             }
@@ -133,7 +132,7 @@ void func_GradeProblem(){ //메인 함수.
 void main(){
     //하나씩 주석처리 풀면서 실행누르기.
     //func_bloodPressureProblem();
-    //func_ChangeStrIntProblem();
+    func_ChangeStrIntProblem();
     //func_nYearProblem();
-    func_GradeProblem();
+    //func_GradeProblem();
 }
