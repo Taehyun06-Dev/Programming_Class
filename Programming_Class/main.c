@@ -102,7 +102,6 @@ char get_Grade(int val){ //점수별 학점(등급)을 받아오는 함수.
 }
 
 void func_GradeProblem(){ //메인 함수.
-
     int nScore;
     int nData[20] = {0};
     int count = -1;
