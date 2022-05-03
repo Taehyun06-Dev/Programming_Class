@@ -5,7 +5,7 @@
 //202202177 차태현
 
 // 1번 문제 시작
-char* get_bloodPressure(int var){ //혈압 수치에 따라 고혈압, 정상혈압, 저혈압 중 하나를 return 하는 함수.
+char* get_bloodPressure(int var){ //혈압 수치에 따라 고혈압, 정상혈압, 저혈압 중 하나를 return 하는 함수. 포인터를 이용해 문자열을 리턴한다.
     if(var > 120){
         return "고혈압";
     }
