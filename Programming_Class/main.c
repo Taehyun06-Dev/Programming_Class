@@ -127,7 +127,7 @@ void func_GradeProblem(){ //메인 함수.
     printf("입력한 개수: %d,  합계: %d,  평균: %.3f\n학점: ", count, sum, (float)sum / (float)count); //float형태에서 소수점 3자리 까지만 출력을 위해 .3f를 사용한다.
 
     for(int i = 0; nData[i] != '\0'; i++){
-        printf("%c", get_Grade(nData[i])); //해당 for문에서 학점(등급)을 출력한다. getGrade()함수에서 등급을 받아온다.
+        printf("%c", get_Grade(nData[i])); //해당 for문에서 학점(등급)을 출력한다. get_Grade()함수에서 등급을 받아온다.
     }
 }
 
