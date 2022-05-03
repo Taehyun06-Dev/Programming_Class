@@ -84,7 +84,7 @@ void func_nYearProblem(){
 //3번 문제 종료
 
 //4번 문제 시작
-char getGrade(int val){ //점수별 학점(등급)을 받아오는 함수.
+char get_Grade(int val){ //점수별 학점(등급)을 받아오는 함수.
     if(val >= 90){
         return 'A';
     }
@@ -113,7 +113,7 @@ void func_GradeProblem(){ //메인 함수.
         }
         count ++;
         nData[count] = nScore;
-        printf("점수 %d, 학점 %c\n", nScore, getGrade(nScore));
+        printf("점수 %d, 학점 %c\n", nScore, get_Grade(nScore));
     }
     printf("점수: ");
     int sum = 0;
@@ -125,7 +125,7 @@ void func_GradeProblem(){ //메인 함수.
     printf("입력한 개수: %d,  합계: %d,  평균: %.3f\n학점: ", count, sum, (float)sum / (float)count); //float형태에서 소수점 3자리 까지만 출력을 위해 .3f를 사용한다.
 
     for(int i = 0; nData[i] != '\0'; i++){
-        printf("%c", getGrade(nData[i])); //해당 for문에서 학점(등급)을 출력한다. getGrade()함수에서 등급을 받아온다.
+        printf("%c", get_Grade(nData[i])); //해당 for문에서 학점(등급)을 출력한다. getGrade()함수에서 등급을 받아온다.
     }
 }
 
