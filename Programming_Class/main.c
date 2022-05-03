@@ -71,9 +71,7 @@ void func_nYearProblem(){
             strcpy(if_odd, "홀수");
         }
         //윤년 판별 구문
-        if((nYear % 4 == 0) && (nYear % 100 != 0)){ //nYear변수가 4의 배수이고, 100의 배수가 아니라면~ 구문.
-            strcpy(if_leap, "윤년");
-        }else if (nYear % 400 == 0){ //nYear변수가 400의 배수라면~ 구문.
+        if(((nYear % 4 == 0) && (nYear % 100 != 0)) || (nYear % 400 == 0)){ //(nYear변수가 4의 배수이고, 100의 배수가 아니다) 또한, (400의 배수이다)구문.
             strcpy(if_leap, "윤년");
         }else{
             strcpy(if_leap, "평년");
