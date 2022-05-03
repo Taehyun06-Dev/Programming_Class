@@ -65,6 +65,7 @@ void func_nYearProblem(){
             free(if_odd); //동적 메모리를 해제한다.
             return;
         }
+        //짝홀 판별 구문
         if(nYear % 2 == 0){
             strcpy(if_odd, "짝수"); //동적 메모리와 관련하여 직접 값을 입력하지 않는다.(이하동일)
         }else{
