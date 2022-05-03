@@ -80,6 +80,8 @@ void func_nYearProblem(){
         }
         printf("%d은 %s, %s\n", nYear, if_odd, if_leap);
     }
+    free(if_leap);
+    free(if_odd);
 }
 //3번 문제 종료
 
