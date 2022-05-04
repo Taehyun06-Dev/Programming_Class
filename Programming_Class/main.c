@@ -186,8 +186,8 @@ void func_GradeProblem_with_stringbuilder(){
 void func_GradeProblem_with_structure(){
 
     typedef struct struct_Score{ //구조체를 typedef를 활용하여 선언한다.
-        int score;
-        char grade;
+        int score; //정수 형태의 점수 저장.
+        char grade; //char 형태의 학점 저장.
     }Scr;
 
     Scr nData[20] = { 0, }; //구조체 배열을 선언과 동시에 초기화함.
