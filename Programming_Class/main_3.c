@@ -4,12 +4,12 @@
 #include <stdlib.h>
 #include <windows.h>
 #define MAX 30 //최대 계좌 생성 갯수를 정의함.
-#define MAX_2 500 //최대 거래내역 저장 갯수를 정의함.
 //C언어는 MAP을 사용할 수 없으므로 구조체 배열로 구현한다. 다만, index형 검색이 아니라 전체 배열에서 계좌 번호값을 검색하므로 검색 속도가 느리다.
 
 void putDemoData();
 void printMainWindow();
 void printWaitWindow_MW();
+char checkPass();
 
 typedef struct {
     char userName[11];
@@ -18,22 +18,14 @@ typedef struct {
     long userAddress;
 } BANK_ACCOUNT;
 
-typedef struct {
-    char transcType[1];
-    char sentUser[10];
-    long sentAddress;
-    long transcBalance;
-} BANK_HISTORY;
-
 static BANK_ACCOUNT BANK_ACCOUNT_LIST[MAX];
-static BANK_HISTORY BANK_HISTORY_LIST[MAX_2];
 
 
 void transferBal() {
     system("cls");
     printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
     printf("\n");
-    printf("☞ 본인의 계좌번호를 입력하십시오: \n");
+    printf("☞ 본인의 계좌번호를 입력하고 엔터를 누르십시오.\n");
     printf("\n");
     printf("────────────────────────────────────────────────────────────────────────────────────────\n");
     long tempInput;
@@ -50,20 +42,11 @@ void transferBal() {
             printf("\n\n☞ 맞으면 Y, 아니면 아무키나 누르십시오.");
             char tempInput_s = _getch();
             if (tempInput_s == 'y' || tempInput_s == 'Y') {
-                system("cls");
-                printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
-                printf("\n");
-                printf("☞ 비밀번호를 입력하십시오.\n");
-                printf("\n");
-                printf("   [본인] 고객명: %s, 계좌번호: %ld\n", BANK_ACCOUNT_LIST[a].userName, BANK_ACCOUNT_LIST[a].userAddress);
-                printf("\n────────────────────────────────────────────────────────────────────────────────────────\n");
-                int tempInput_m;
-                scanf_s("%d", &tempInput_m);
-                if (tempInput_m == BANK_ACCOUNT_LIST[a].userPassword) {
+                if (checkPass(BANK_ACCOUNT_LIST[a].userPassword) == 1) {
                     system("cls");
                     printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
                     printf("\n");
-                    printf("☞ 이체할 계좌를 입력하십시오.\n");
+                    printf("☞ 이체할 계좌를 입력하고 엔터를 누르십시오.\n");
                     printf("\n");
                     printf("   [본인] 고객명: %s, 계좌번호: %ld\n", BANK_ACCOUNT_LIST[a].userName, BANK_ACCOUNT_LIST[a].userAddress);
                     printf("\n────────────────────────────────────────────────────────────────────────────────────────\n");
@@ -85,7 +68,7 @@ void transferBal() {
                                 system("cls");
                                 printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
                                 printf("\n");
-                                printf("☞ 다음 계좌에서 이체할 금액을 입력하십시오.\n");
+                                printf("☞ 다음 계좌에서 이체할 금액을 입력하고 엔터를 누르십시오.\n");
                                 printf("\n");
                                 printf("   [본인] 고객명: %s, 계좌번호: %ld\n\n", BANK_ACCOUNT_LIST[a].userName, BANK_ACCOUNT_LIST[a].userAddress);
                                 printf("   [상대] 고객명: %s, 계좌번호: %ld\n", BANK_ACCOUNT_LIST[b].userName, BANK_ACCOUNT_LIST[b].userAddress);
@@ -149,7 +132,7 @@ void withdrawBal() {
     system("cls");
     printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
     printf("\n");
-    printf("☞ 출금할 계좌번호를 입력하십시오: \n");
+    printf("☞ 출금할 계좌번호를 입력하고 엔터를 누르십시오.\n");
     printf("\n");
     printf("────────────────────────────────────────────────────────────────────────────────────────\n");
     long tempInput;
@@ -166,20 +149,11 @@ void withdrawBal() {
             printf("\n\n☞ 맞으면 Y, 아니면 아무키나 누르십시오.");
             char tempInput_s = _getch();
             if (tempInput_s == 'y' || tempInput_s == 'Y') {
-                system("cls");
-                printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
-                printf("\n");
-                printf("☞ 비밀번호를 입력하십시오.\n");
-                printf("\n");
-                printf("   고객명: %s, 계좌번호: %ld\n", BANK_ACCOUNT_LIST[a].userName, BANK_ACCOUNT_LIST[a].userAddress);
-                printf("\n────────────────────────────────────────────────────────────────────────────────────────\n");
-                int tempInput_m;
-                scanf_s("%d", &tempInput_m);
-                if (tempInput_m == BANK_ACCOUNT_LIST[a].userPassword) {
+                if (checkPass(BANK_ACCOUNT_LIST[a].userPassword) == 1) {
                     system("cls");
                     printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
                     printf("\n");
-                    printf("☞ 다음 계좌에서 출금할 금액을 입력하십시오.\n");
+                    printf("☞ 다음 계좌에서 출금할 금액을 입력하고 엔터를 누르십시오.\n");
                     printf("\n");
                     printf("   고객명: %s, 계좌번호: %ld\n", BANK_ACCOUNT_LIST[a].userName, BANK_ACCOUNT_LIST[a].userAddress);
                     printf("\n────────────────────────────────────────────────────────────────────────────────────────\n");
@@ -216,7 +190,7 @@ void withdrawBal() {
                             printf("\n");
                             printf("   고객명: %s, 계좌번호: %ld\n", BANK_ACCOUNT_LIST[a].userName, BANK_ACCOUNT_LIST[a].userAddress);
                             printf("\n");
-                            printf("   거래명: 출금, 금액: %d원, 잔액: %d원\n", tempInput_m, BANK_ACCOUNT_LIST[a].userBalance);
+                            printf("   거래명: 출금, 금액: %d원, 잔액: %d원\n", tempInput_m2, BANK_ACCOUNT_LIST[a].userBalance);
                             printf("\n────────────────────────────────────────────────────────────────────────────────────────\n");
                             printWaitWindow_MW();
                             break;
@@ -249,7 +223,7 @@ void depositBal() {
     system("cls");
     printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
     printf("\n");
-    printf("☞ 입금할 계좌번호를 입력하십시오: \n");
+    printf("☞ 입금할 계좌번호를 입력하고 엔터를 누르십시오.\n");
     printf("\n");
     printf("────────────────────────────────────────────────────────────────────────────────────────\n");
     long tempInput;
@@ -316,23 +290,14 @@ void searchByName() {
     system("cls");
     printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
     printf("\n");
-    printf("☞ 검색할 고객명을 입력하십시오: \n");
+    printf("☞ 검색할 고객명을 입력하고 엔터를 누르십시오.\n");
     printf("\n");
     printf("────────────────────────────────────────────────────────────────────────────────────────\n");
     char tempInput[10];
     scanf_s("%s", &tempInput, 11);
     for(int a = 0; a < 9; a++) {
         if(strcmp(BANK_ACCOUNT_LIST[a].userName, tempInput) == 0){
-            system("cls");
-            printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
-            printf("\n");
-            printf("☞ 비밀번호를 입력하십시오.\n");
-            printf("\n");
-            printf("   고객명: %s, 계좌번호: %ld\n", BANK_ACCOUNT_LIST[a].userName, BANK_ACCOUNT_LIST[a].userAddress);
-            printf("\n────────────────────────────────────────────────────────────────────────────────────────\n");
-            int tempInput_m;
-            scanf_s("%d", &tempInput_m);
-            if (tempInput_m == BANK_ACCOUNT_LIST[a].userPassword) {
+            if (checkPass(BANK_ACCOUNT_LIST[a].userPassword) == 1) {
                 system("cls");
                 printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
                 printf("\n");
@@ -367,23 +332,14 @@ void searchByAddr() {
     system("cls");
     printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
     printf("\n");
-    printf("☞ 검색할 계좌번호를 입력하십시오: \n");
+    printf("☞ 검색할 계좌번호를 입력하고 엔터를 누르십시오.\n");
     printf("\n");
     printf("────────────────────────────────────────────────────────────────────────────────────────\n");
     long tempInput;
     scanf_s("%ld", &tempInput);
     for(int a = 0; a < 9; a++) {
         if(BANK_ACCOUNT_LIST[a].userAddress == tempInput) {
-            system("cls");
-            printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
-            printf("\n");
-            printf("☞ 비밀번호를 입력하십시오.\n");
-            printf("\n");
-            printf("   고객명: %s, 계좌번호: %ld\n", BANK_ACCOUNT_LIST[a].userName, BANK_ACCOUNT_LIST[a].userAddress);
-            printf("\n────────────────────────────────────────────────────────────────────────────────────────\n");
-            int tempInput_m;
-            scanf_s("%d", &tempInput_m);
-            if (tempInput_m == BANK_ACCOUNT_LIST[a].userPassword) {
+            if (checkPass(BANK_ACCOUNT_LIST[a].userPassword) == 1) {
                 system("cls");
                 printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
                 printf("\n");
@@ -478,13 +434,13 @@ void printGoodByeWindow() {
     system("cls");
     printf("\n");
     printf("\n");
-    printf("   □□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□\n");
-    printf("   □□□■■■■■□□■■■■□■■■■□□■■■□□□■■■■□□■□□□■□■■■■□□□\n");
-    printf("   □□□■□□□□□□■□□■□■□□■□□■□□■□□■□□■□□□■□■□□■□□□□□□\n");
-    printf("   □□□■□□■■□□■□□■□■□□■□□■□□■□□■□■□□□□□■□□□■■■■□□□\n");
-    printf("   □□□■□□□■□□■□□■□■□□■□□■□□■□□■□□■□□□□■□□□■□□□□□□\n");
-    printf("   □□□■■■■■□□■■■■□■■■■□□■■■□□□■■■■□□□□■□□□■■■■□□□\n");
-    printf("   □□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□\n");
+    printf("                                                                                                         \n");
+    printf("        ■■■■■    ■■■■■    ■■■■■    ■■■■     ■■■■      ■      ■    ■■■■■    \n");
+    printf("        ■            ■      ■    ■      ■    ■      ■   ■      ■      ■  ■      ■            \n");
+    printf("        ■    ■■    ■      ■    ■      ■    ■      ■   ■  ■■          ■        ■■■■■    \n");
+    printf("        ■      ■    ■      ■    ■      ■    ■      ■   ■      ■        ■        ■            \n");
+    printf("        ■■■■■    ■■■■■    ■■■■■    ■■■■     ■■■■          ■        ■■■■■    \n");
+    printf("                                                                                                         \n");
     printf("\n");
     printf("\n");
     Sleep(300);
@@ -512,7 +468,6 @@ void printMainWindow() {
     printf("\n");
     printf("☞ 작업을 선택하십시오. 본 시스템은 데모 데이터를 이용하여 운영됩니다.\n");
     printf("☞ 숫자 입력란에는 숫자만 입력하시고, 꼬일시 껏다가 켜주시기 바랍니다.\n");
-    printf("☞ 시간상 예외처리를 많이 하지 못해 문제가 발생할 수 있습니다.\n");
     printf("\n");
     printf("1 : 모든 정보 조회 - 개발&테스트용\n");
     printf("2 : 계좌 번호로 정보 조회(잔액조회)\n");
@@ -553,6 +508,20 @@ void printMainWindow() {
         break;
     }
 
+}
+
+char checkPass(int pass) {
+    system("cls");
+    printf("───────────────────────────────────── [ BANK INFO ]─────────────────────────────────────\n");
+    printf("\n");
+    printf("☞ 비밀번호 4자리를 입력하고 엔터를 누르십시오.\n");
+    printf("\n────────────────────────────────────────────────────────────────────────────────────────\n");
+    int tempInput_m;
+    scanf_s("%d", &tempInput_m);
+    if (tempInput_m == pass) {
+        return 1;
+    }
+    return 0;
 }
 
 void main() {
