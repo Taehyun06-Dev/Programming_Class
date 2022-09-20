@@ -57,11 +57,26 @@ void Solution_2() {
 }
 
 void createDummyData() {
-	for (int i = 0; i < DUMMY_SIZE; i++) {
+	for (int i = 0; i < DUMMY_SIZE - 4; i++) {
 		TRI_VALUE_LIST[i].x = rand() % 9 + 1;
 		TRI_VALUE_LIST[i].y = rand() % 9 + 1;
 		TRI_VALUE_LIST[i].z = rand() % 9 + 1;
 	}
+	//임의 데이터 삽임
+	//예각
+	TRI_VALUE_LIST[DUMMY_SIZE - 3].x = 5;
+	TRI_VALUE_LIST[DUMMY_SIZE - 3].y = 5;
+	TRI_VALUE_LIST[DUMMY_SIZE - 3].z = 6;
+
+	//직각
+	TRI_VALUE_LIST[DUMMY_SIZE - 2].x = 3;
+	TRI_VALUE_LIST[DUMMY_SIZE - 2].y = 4;
+	TRI_VALUE_LIST[DUMMY_SIZE - 2].z = 5;
+
+	//둔각
+	TRI_VALUE_LIST[DUMMY_SIZE-1].x = 4;
+	TRI_VALUE_LIST[DUMMY_SIZE-1].y = 9;
+	TRI_VALUE_LIST[DUMMY_SIZE-1].z = 6;
 }
 
 void printAskWindow() {
@@ -93,8 +108,3 @@ void main() {
 	createDummyData();
 	printMainWindow();
 }
-
-
-
-
-
