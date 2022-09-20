@@ -97,6 +97,4 @@ void main() {
 
 
 
-/*결과
-![캡처](https://user-images.githubusercontent.com/61714078/191159605-02ad0c78-0006-488e-98b7-e78a7bd09ad4.PNG)
-*/
+
