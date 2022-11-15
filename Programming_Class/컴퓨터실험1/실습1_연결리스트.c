@@ -25,7 +25,7 @@ void addData(linkedList* L, int n, int m, int f) {
 	
 	if (L->head == NULL && L->tail == NULL) {
 		L->head = L->tail = newNode;
-	}else {
+	}else{
 		L->tail->next = newNode;
 		L->tail = newNode;
 	}
@@ -47,8 +47,8 @@ void printAll(linkedList* L) {
 int* getInput(linkedList* L) {
     
 	static int inputList[3];
-    printf("학번 중간 기말점수 순으로 입력하십시오: ");
-    scanf_s("%d %d %d", &inputList[0], &inputList[1], &inputList[2]);
+    	printf("학번 중간 기말점수 순으로 입력하십시오: ");
+   	scanf_s("%d %d %d", &inputList[0], &inputList[1], &inputList[2]);
 	return inputList;
 
 }
