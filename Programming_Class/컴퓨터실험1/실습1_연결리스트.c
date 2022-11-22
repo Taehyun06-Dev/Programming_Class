@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 typedef struct _list {
-	struct _node* cur;
 	struct _node* head;
 	struct _node* tail;
 } linkedList;
@@ -29,7 +28,6 @@ void addData(linkedList* L, int n, int m, int f) {
 		L->tail->next = newNode;
 		L->tail = newNode;
 	}
-	L->cur = newNode;
 
 }
 
@@ -56,7 +54,6 @@ int* getInput(linkedList* L) {
 linkedList* initList() {
 	
 	linkedList* L = (linkedList*)malloc(sizeof(linkedList));
-	L->cur = NULL;
 	L->head = NULL;
 	L->tail = NULL;
 	return L;
