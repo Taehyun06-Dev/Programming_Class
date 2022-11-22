@@ -60,13 +60,16 @@ void addMember(linkedList* L) {
 		addData(L, num, score);
 		return;
 	}
+	node* newNode = (node*)malloc(sizeof(node));
+	newNode->num = num;
+	newNode->score = score;
+	newNode->next = NULL;
 	node* p = L->head;
 	while (p != NULL) {
 		if (p->score < score) {
-			p->next->score = p->score;
-			p->next->num = p->num;
-			p->num = num;
-			p->score = score;
+			printf("ang");
+			newNode->next = p->next;
+			p = newNode;
 			return;
 		}
 		p = p->next;
