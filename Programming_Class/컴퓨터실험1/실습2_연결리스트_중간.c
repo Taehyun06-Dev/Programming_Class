@@ -38,10 +38,15 @@ void printAll(linkedList* L) {
 
 	printf("\n");
 	node* p = L->head;
+	double sum = 0;
+	double counter = 0;
 	while (p != NULL) {
+		sum += p->score;
+		counter++;
 		printf("학번: %d, 성적: %d\n", p->num, p->score);
 		p = p->next;
 	}
+	printf("\n평균: %.2f", sum / counter);
 
 }
 
@@ -73,15 +78,11 @@ void addMember(linkedList* L) {
 	while (p != NULL && p->next != NULL) {
 		if (p->score < score) {
 			insert = p;
-			printf("값은 %d입니다.\n", insert->score);
 		}
 		p = p->next;
 		if (p->score >= score && insert != NULL) {
-			printf("task2\n");
-			if (insert->next->next != NULL) {
-				printf("ok2\n");
-				newNode->next = insert->next->next;
-			}
+			node* temp = insert->next;
+			newNode->next = temp;
 			insert->next = newNode;
 			comp = 't';
 			break;
@@ -100,22 +101,43 @@ void addMember(linkedList* L) {
 			L->tail->next = newNode;
 		}
 
-		if (insert != NULL ) {
-			printf("task3\n");
-			if (insert->next->next != NULL) {
-				printf("ok3\n");
-				newNode->next = insert->next->next;
-			}
-			insert->next = newNode;
-			comp = 't';
-		}
-
 
 	}
-	
+
 }
 
-void delMember() {
+void delMember(linkedList* L) {
+	
+	printf("\n삭제할 학번을 입력하십시오.");
+	int num;
+	scanf_s("%d", &num);
+	char comp = 'f';
+	node* p = L->head;
+
+	if (p->num == num) {
+		L->head = p->next;
+		comp = 't';
+		printf("삭제완료.\n");
+	}
+	
+	while (p != NULL&&comp=='f') {
+		if (p->next->num == num) {
+			node* temp = p->next;
+			if (temp->next != NULL) {
+				p->next = temp->next;
+			}else {
+				p->next = NULL;
+			}
+			comp = 't';
+			printf("삭제완료.\n");
+			break;
+		}
+		p = p->next;
+	}
+
+	if (comp == 'f') {
+		printf("에러: 일치하는 학번이 없습니다.\n");
+	}
 
 }
 
@@ -126,11 +148,14 @@ void main() {
 		printf("\n[메뉴] 1.추가   2.삭제   3.출력\n");
 		char input = _getch();
 		switch (input) {
+		case '0':
+			printf("종료합니다.\n");
+			exit(1);
 		case '1':
 			addMember(L);
 			break;
 		case '2':
-			delMember();
+			delMember(L);
 			break;
 		case '3':
 			printAll(L);
