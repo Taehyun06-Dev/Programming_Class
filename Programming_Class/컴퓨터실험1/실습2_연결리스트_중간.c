@@ -13,6 +13,7 @@ typedef struct _node {
 	struct _node* next;
 } node;
 
+/*
 void addData(linkedList* L, int n, int m) {
 
 	node* newNode = (node*)malloc(sizeof(node));
@@ -30,6 +31,8 @@ void addData(linkedList* L, int n, int m) {
 	}
 
 }
+*/
+
 
 void printAll(linkedList* L) {
 
@@ -52,29 +55,64 @@ linkedList* initList() {
 
 }
 
+
 void addMember(linkedList* L) {
+
 	printf("\n학번과 점수를 입력하십시오.");
 	int num, score;
 	scanf_s("%d %d", &num, &score);
-	if (L->head == NULL) {
-		addData(L, num, score);
-		return;
-	}
+	node* p = L->head;
+	node* insert = NULL;
+	char comp = 'f';
+
 	node* newNode = (node*)malloc(sizeof(node));
 	newNode->num = num;
 	newNode->score = score;
 	newNode->next = NULL;
-	node* p = L->head;
-	while (p != NULL) {
+
+	while (p != NULL && p->next != NULL) {
 		if (p->score < score) {
-			printf("ang");
-			newNode->next = p->next;
-			p = newNode;
-			return;
+			insert = p;
+			printf("값은 %d입니다.\n", insert->score);
 		}
 		p = p->next;
+		if (p->score >= score && insert != NULL) {
+			printf("task2\n");
+			if (insert->next->next != NULL) {
+				printf("ok2\n");
+				newNode->next = insert->next->next;
+			}
+			insert->next = newNode;
+			comp = 't';
+			break;
+		}
 	}
-	addData(L, num, score);
+
+	if (comp == 'f') {
+
+		if (L->head == NULL) {
+			L->head = newNode;
+		}
+		else  if (L->tail == NULL) {
+			L->head->next = L->tail = newNode;
+		}
+		else {
+			L->tail->next = newNode;
+		}
+
+		if (insert != NULL ) {
+			printf("task3\n");
+			if (insert->next->next != NULL) {
+				printf("ok3\n");
+				newNode->next = insert->next->next;
+			}
+			insert->next = newNode;
+			comp = 't';
+		}
+
+
+	}
+	
 }
 
 void delMember() {
